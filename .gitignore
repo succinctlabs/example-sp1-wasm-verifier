@@ -1,0 +1,14 @@
+# build target
+target
+
+# generated package
+pkg
+
+# elfs
+elfs
+elf
+
+# env
+.env
+
+.DS_Store

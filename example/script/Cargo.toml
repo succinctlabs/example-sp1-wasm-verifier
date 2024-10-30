@@ -1,0 +1,15 @@
+[package]
+version = "0.1.0"
+name = "example-script"
+edition = "2021"
+
+[dependencies]
+sp1-sdk.workspace = true
+clap = { version = "4.0", features = ["derive"] }
+hex = "0.4.3"
+serde = "1.0"
+serde_json = "1.0"
+
+
+[build-dependencies]
+sp1-build.workspace = true
