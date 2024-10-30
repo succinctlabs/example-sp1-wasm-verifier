@@ -1,8 +1,10 @@
+//! A simple script to generate proofs for the fibonacci program, and serialize them to JSON.
+
 use clap::Parser;
 use serde::{Deserialize, Serialize};
 use sp1_sdk::{include_elf, utils, HashableKey, ProverClient, SP1ProofWithPublicValues, SP1Stdin};
 
-/// The ELF (executable and linkable format) file for the Succinct RISC-V zkVM.
+/// The ELF (executable and linkable format) file for the fibonacci program.
 pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
 
 #[derive(Serialize, Deserialize)]
@@ -67,8 +69,8 @@ fn main() {
         };
         proof.save(&proof_path).expect("Failed to save proof");
     }
+    // Load the proof, extract the proof and public inputs, and serialize the appropriate fields.
     let proof = SP1ProofWithPublicValues::load(&proof_path).expect("Failed to load proof");
-
     let fixture = ProofData {
         proof: hex::encode(proof.raw_with_checksum()),
         public_inputs: hex::encode(proof.public_values),
@@ -76,8 +78,9 @@ fn main() {
         mode: args.mode,
     };
 
+    // Serialize the proof data to a JSON file.
     let json_proof = serde_json::to_string(&fixture).expect("Failed to serialize proof");
     std::fs::write(json_path, json_proof).expect("Failed to write JSON proof");
 
-    println!("Successfully verified proof for the program!")
+    println!("Successfully generated json proof for the program!")
 }

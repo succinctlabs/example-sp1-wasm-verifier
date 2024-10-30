@@ -13,7 +13,7 @@ This repo demonstrates how to verify Groth16 and Plonk proofs in browser. We wra
 
 ### Wasm Bindings
 
-First, generate the wasm library for the verifier. From the repository root, run:
+First, generate the wasm library for the verifier. From the `verifier` directory, run:
 
 ```bash
 wasm-pack build --target nodejs --dev 

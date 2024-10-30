@@ -7,3 +7,9 @@ sp1-verifier = { git = "https://github.com/succinctlabs/sp1", branch = "yuwen/ve
 sp1-sdk = { git = "https://github.com/succinctlabs/sp1", branch = "yuwen/verifier-crate" }
 sp1-zkvm = { git = "https://github.com/succinctlabs/sp1", branch = "yuwen/verifier-crate" }
 sp1-build = { git = "https://github.com/succinctlabs/sp1", branch = "yuwen/verifier-crate" }
+
+# Use this if 1. You're not using the network prover or 2. after a new release of sp1 is out.
+# sp1-verifier = { git = "https://github.com/succinctlabs/sp1" }
+# sp1-sdk = { git = "https://github.com/succinctlabs/sp1" }
+# sp1-zkvm = { git = "https://github.com/succinctlabs/sp1" }
+# sp1-build = { git = "https://github.com/succinctlabs/sp1" }
