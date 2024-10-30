@@ -1,6 +1,6 @@
 [package]
 name = "sp1-wasm-verifier"
-authors = ["Bhargav Annem"]
+authors = ["Bhargav Annem, Yuwen Zhang"]
 description = "A rust verifier for BN254 curve"
 repository = "https://github.com/succinctlabs/sp1-wasm-verifier"
 keywords = ["zero-knowledge", "cryptography", "zkSNARK", "SNARK", "gnark"]
