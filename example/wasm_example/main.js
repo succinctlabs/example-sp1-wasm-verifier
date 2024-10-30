@@ -29,6 +29,18 @@ for (const file of files) {
         const public_inputs = fromHexString(proof_json.public_inputs);
         const vkey_hash = proof_json.vkey_hash;
 
+        // Get the values using DataView for correct endianness handling
+        const view = new DataView(public_inputs.buffer);
+
+        // Read each 32-bit (4 byte) integer as little-endian
+        const n = view.getUint32(0, true);
+        const a = view.getUint32(4, true);
+        const b = view.getUint32(8, true);
+
+        console.log(`n: ${n}`);
+        console.log(`a: ${a}`);
+        console.log(`b: ${b}`);
+
         // Select the appropriate verification function and verification key based on ZKP type
         const verifyFunction = zkpType === 'groth16' ? wasm.verify_groth16 : wasm.verify_plonk;
 
