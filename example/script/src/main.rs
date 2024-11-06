@@ -72,7 +72,7 @@ fn main() {
     // Load the proof, extract the proof and public inputs, and serialize the appropriate fields.
     let proof = SP1ProofWithPublicValues::load(&proof_path).expect("Failed to load proof");
     let fixture = ProofData {
-        proof: hex::encode(proof.raw_with_checksum()),
+        proof: hex::encode(proof.bytes()),
         public_inputs: hex::encode(proof.public_values),
         vkey_hash: vk.bytes32(),
         mode: args.mode,

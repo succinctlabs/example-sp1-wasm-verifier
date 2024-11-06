@@ -29,7 +29,7 @@ for (const file of files) {
         const public_inputs = fromHexString(proof_json.public_inputs);
         const vkey_hash = proof_json.vkey_hash;
 
-        // Get the values using DataView for correct endianness handling
+        // Get the values using DataView.
         const view = new DataView(public_inputs.buffer);
 
         // Read each 32-bit (4 byte) integer as little-endian
