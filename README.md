@@ -20,6 +20,9 @@ wasm-pack build --target nodejs --dev
 ```
 
 This will generate wasm bindings for the rust functions in [`verifier/src/lib.rs`](verifier/src/lib.rs).
+> Note: generating wasm bindings in dev mode will result in drastically slower verification times.
+> Generate bindings in release mode by replacing `--dev` with `--release`.
+
 As an example, the following snippet provides wasm bindings for the `verify_groth16` function:
 
 ```rust,noplayground

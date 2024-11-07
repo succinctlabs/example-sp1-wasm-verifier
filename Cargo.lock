@@ -4683,7 +4683,8 @@ dependencies = [
 [[package]]
 name = "sp1-build"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f6b105fff1973a6b54f1f02c38b6ccea683a0802f9728038c30c029204224dfd"
 dependencies = [
  "anyhow",
  "cargo_metadata",
@@ -4695,7 +4696,8 @@ dependencies = [
 [[package]]
 name = "sp1-core-executor"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6a01108c7ffd59cd5bf5011e3755c96c59f1d434b2a43bf64e406741e148bedd"
 dependencies = [
  "bincode",
  "bytemuck",
@@ -4728,7 +4730,8 @@ dependencies = [
 [[package]]
 name = "sp1-core-machine"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e974dd651074fe44d0c7a2bfc92af216be7567765a2672db671786c985158582"
 dependencies = [
  "bincode",
  "cfg-if",
@@ -4775,7 +4778,8 @@ dependencies = [
 [[package]]
 name = "sp1-curves"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e0c1eedc6885d3e2f36288c476025cd135f945e00d7f78807c0f49a739040db8"
 dependencies = [
  "cfg-if",
  "curve25519-dalek",
@@ -4796,7 +4800,8 @@ dependencies = [
 [[package]]
 name = "sp1-derive"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "380b7985f23bad1b8efea5fc20e262c996aeb7681e716d64ecab8dbfeb3e313d"
 dependencies = [
  "quote",
  "syn 1.0.109",
@@ -4804,18 +4809,9 @@ dependencies = [
 
 [[package]]
 name = "sp1-lib"
-version = "3.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "14deb700469a37ec075bcf88dac3815b026dd9c4b9cb175980826f1fbb2e4e80"
-dependencies = [
- "bincode",
- "serde",
-]
-
-[[package]]
-name = "sp1-lib"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c1aa18834c58df127706eb2fb2ea6e2892dbf0361d6b2485bf7b3fbd5f8b8c3c"
 dependencies = [
  "bincode",
  "serde",
@@ -4824,7 +4820,8 @@ dependencies = [
 [[package]]
 name = "sp1-primitives"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fe975ae9d2eab6d9c7247b8463075635a91f4e5f3dd83cb47ad65bc612fe8bea"
 dependencies = [
  "bincode",
  "hex",
@@ -4841,7 +4838,8 @@ dependencies = [
 [[package]]
 name = "sp1-prover"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3bb8006a7cc1b8b5eb6a770a7311ea8530822c8a974a8b345c4c25041aef7e4b"
 dependencies = [
  "anyhow",
  "bincode",
@@ -4882,7 +4880,8 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-circuit"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "761f03296f61eb2efcc3e050d95cbead1145a798ddae8abd9046bf7cdd100f46"
 dependencies = [
  "hashbrown 0.14.5",
  "itertools 0.13.0",
@@ -4915,7 +4914,8 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-compiler"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4697df1b5cc578f980642b97808ed9606e7752c9e60d89cf75a9716cd9dfbaf6"
 dependencies = [
  "backtrace",
  "itertools 0.13.0",
@@ -4936,7 +4936,8 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-core"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a58e44746f19fb58aed53c5a245d78e82ea329849619bc6741f480fdeae41513"
 dependencies = [
  "backtrace",
  "ff 0.13.0",
@@ -4971,7 +4972,8 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-derive"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a506447385933d969216f43c5f5470e7b7fcb86ee7a5dc3764c06569890a5a63"
 dependencies = [
  "quote",
  "syn 1.0.109",
@@ -4980,7 +4982,8 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-gnark-ffi"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1d1ec4d0afb53c10494f6fdc9cec2ef8442d5152f4985e76596de94151c1670f"
 dependencies = [
  "anyhow",
  "bincode",
@@ -5005,7 +5008,8 @@ dependencies = [
 [[package]]
 name = "sp1-sdk"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d9ecc09deae0cfb196f54f09e68b117ac745e85c14b7fc94e18756224fdb7915"
 dependencies = [
  "alloy-sol-types",
  "anyhow",
@@ -5045,7 +5049,8 @@ dependencies = [
 [[package]]
 name = "sp1-stark"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "38c9a17aba644d3dc9ed1729accbf9b0f854611c9773d457ba1a6ac01d2f88b9"
 dependencies = [
  "arrayref",
  "getrandom",
@@ -5080,7 +5085,8 @@ dependencies = [
 [[package]]
 name = "sp1-verifier"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "15758ac5c27c1dc5eba078404a0cb52fdd4e9567e02d9e884ec473e47a682e5d"
 dependencies = [
  "hex",
  "lazy_static",
@@ -5100,7 +5106,8 @@ dependencies = [
 [[package]]
 name = "sp1-zkvm"
 version = "3.2.0"
-source = "git+https://github.com/succinctlabs/sp1?branch=yuwen/verifier-3.0.0#579993cac71ff522fbe7f783361e87f0b62d93a2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "91164d10b4ac93af8efaed31229a2a24f00b637aa56663e96d48eea6c97682d6"
 dependencies = [
  "cfg-if",
  "getrandom",
@@ -5108,7 +5115,7 @@ dependencies = [
  "libm",
  "rand",
  "sha2",
- "sp1-lib 3.2.0",
+ "sp1-lib",
 ]
 
 [[package]]
@@ -5186,7 +5193,7 @@ dependencies = [
  "num-bigint 0.4.6",
  "rand",
  "rustc-hex",
- "sp1-lib 3.1.0",
+ "sp1-lib",
 ]
 
 [[package]]
