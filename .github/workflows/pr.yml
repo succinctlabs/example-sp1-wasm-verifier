@@ -22,6 +22,9 @@ jobs:
           curl -L https://sp1.succinct.xyz | bash
           ~/.sp1/bin/sp1up
 
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
       - name: Generate wasmpack
         run: |
           cd verifier
