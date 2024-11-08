@@ -1,0 +1,43 @@
+name: PR
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+  
+
+jobs:
+  example-e2e:
+    name: Example E2E
+    runs-on: [runs-on, runner=64cpu-linux-x64, "run-id=${{ github.run_id }}"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install SP1
+        run: |
+          curl -L https://sp1.succinct.xyz | bash
+          ~/.sp1/bin/sp1up
+
+      - name: Generate wasmpack
+        run: |
+          cd verifier
+          wasm-pack build --target nodejs --dev
+
+      - name: Generate proofs
+        run: |
+          cd example/script
+          RUST_LOG=info cargo run --release -- --mode plonk --prove
+          RUST_LOG=info cargo run --release -- --mode groth16 --prove
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+          
+      - name: Verify proofs
+        run: |
+          cd example/wasm_example
+          pnpm install
+          pnpm test
