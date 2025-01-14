@@ -45,7 +45,7 @@ fn main() {
     stdin.write(&1000u32);
 
     // Initialize the prover client.
-    let client = ProverClient::new();
+    let client = ProverClient::from_env();
     let (pk, vk) = client.setup(FIBONACCI_ELF);
 
     // These are the output paths.
@@ -56,12 +56,12 @@ fn main() {
         // Generate a proof for the specified program
         let proof = match args.mode.as_str() {
             "groth16" => client
-                .prove(&pk, stdin)
+                .prove(&pk, &stdin)
                 .groth16()
                 .run()
                 .expect("Groth16 proof generation failed"),
             "plonk" => client
-                .prove(&pk, stdin)
+                .prove(&pk, &stdin)
                 .plonk()
                 .run()
                 .expect("Plonk proof generation failed"),
