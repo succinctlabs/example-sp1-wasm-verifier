@@ -65,7 +65,12 @@ fn main() {
                 .plonk()
                 .run()
                 .expect("Plonk proof generation failed"),
-            _ => panic!("Invalid proof mode. Use 'groth16' or 'plonk'."),
+            "compressed" => client
+                .prove(&pk, &stdin)
+                .compressed()
+                .run()
+                .expect("Compressed proof generation failed"),
+            _ => panic!("Invalid proof mode. Use 'groth16', 'plonk', or 'compressed'."),
         };
         proof.save(&proof_path).expect("Failed to save proof");
     }
