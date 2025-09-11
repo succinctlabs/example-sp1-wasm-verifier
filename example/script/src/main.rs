@@ -101,10 +101,10 @@ fn main() -> Result<()> {
         // Compress the "compressed" proofs.
         match args.mode {
             Mode::Compressed => {
-                let file = File::create(&proof_path).with_context(|| {
+                let mut file = File::create(&proof_path).with_context(|| {
                     format!("failed to create file for saving proof: {proof_path}")
                 })?;
-                let mut file = GzEncoder::new(file, Compression::default());
+                // let mut file = GzEncoder::new(file, Compression::default());
                 bincode::serde::encode_into_std_write(
                     proof,
                     &mut file,
