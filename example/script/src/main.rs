@@ -1,12 +1,18 @@
 //! A simple script to generate proofs for the fibonacci program, and serialize them to JSON.
 
-use std::{fmt::Display, fs::File};
+use std::{
+    fmt::Display,
+    fs::File,
+    io::{BufReader, BufWriter},
+};
 
-use anyhow::{Context, Result};
+use anyhow::{bail, Context, Result};
 use clap::{Parser, ValueEnum};
-use flate2::{write::GzEncoder, Compression};
+use flate2::{bufread::GzDecoder, write::GzEncoder, Compression};
 use serde::{Deserialize, Serialize};
-use sp1_sdk::{include_elf, utils, HashableKey, ProverClient, SP1ProofWithPublicValues, SP1Stdin};
+use sp1_sdk::{
+    include_elf, utils, HashableKey, ProverClient, SP1Proof, SP1ProofWithPublicValues, SP1Stdin,
+};
 
 /// The ELF (executable and linkable format) file for the fibonacci program.
 pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
@@ -98,35 +104,62 @@ fn main() -> Result<()> {
                 .run()
                 .context("Compressed proof generation failed")?,
         };
-        // Compress the "compressed" proofs.
+
         match args.mode {
             Mode::Compressed => {
-                let mut file = File::create(&proof_path).with_context(|| {
+                // For the time being, we just (de)serialize the entire `SP1ReduceProof`.
+                let file = File::create(&proof_path).with_context(|| {
                     format!("failed to create file for saving proof: {proof_path}")
                 })?;
-                // let mut file = GzEncoder::new(file, Compression::default());
-                bincode::serde::encode_into_std_write(
-                    proof,
-                    &mut file,
-                    bincode::config::standard(),
-                )
-                .context("Failed to save proof")?;
+                // Compress the "compressed" proofs.
+                let mut file = GzEncoder::new(BufWriter::new(file), Compression::default());
+                bincode::serialize_into(&mut file, &proof).context("Failed to save proof")?;
             }
             _ => proof.save(&proof_path).expect("Failed to save proof"),
         }
     }
+
     // Load the proof, extract the proof and public inputs, and serialize the appropriate fields.
-    let proof = SP1ProofWithPublicValues::load(&proof_path).expect("Failed to load proof");
-    let fixture = ProofData {
-        proof: hex::encode(proof.bytes()),
-        public_inputs: hex::encode(proof.public_values),
-        vkey_hash: vk.bytes32(),
-        mode: args.mode.to_string(),
+    let fixture = match args.mode {
+        Mode::Compressed => {
+            // For the time being, we just (de)serialize the entire `SP1ReduceProof`.
+            let path = &proof_path;
+            // Try to load a [`Self`] from the file.
+            let file = File::open(path)
+                .with_context(|| format!("failed to open file for loading proof: {}", path))?;
+            let file = GzDecoder::new(BufReader::new(file));
+            let proof: SP1ProofWithPublicValues =
+                bincode::deserialize_from(file).context("Failed to load proof")?;
+
+            let reduce_proof = match proof.proof {
+                SP1Proof::Compressed(p) => p,
+                other => bail!("unexpected proof: {other:?}"),
+            };
+
+            ProofData {
+                proof: hex::encode(bincode::serialize(&reduce_proof)?),
+                // public_inputs: "TODO".to_owned(),
+                public_inputs: hex::encode(bincode::serialize(&proof.public_values)?), // May be unused at the moment.
+                vkey_hash: "TODO".to_owned(),
+                mode: args.mode.to_string(),
+            }
+        }
+        _ => {
+            let proof = SP1ProofWithPublicValues::load(&proof_path).expect("Failed to load proof");
+            ProofData {
+                proof: hex::encode(proof.bytes()),
+                public_inputs: hex::encode(proof.public_values),
+                vkey_hash: vk.bytes32(),
+                mode: args.mode.to_string(),
+            }
+        }
     };
 
     // Serialize the proof data to a JSON file.
-    let json_proof = serde_json::to_string(&fixture).expect("Failed to serialize proof");
-    std::fs::write(json_path, json_proof).expect("Failed to write JSON proof");
+
+    let file = File::create(&json_path)
+        .with_context(|| format!("failed to create file for saving proof: {proof_path}"))?;
+    serde_json::to_writer(file, &fixture).context("Failed to serialize and save proof")?;
 
     println!("Successfully generated json proof for the program!");
 

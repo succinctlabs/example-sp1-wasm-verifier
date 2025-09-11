@@ -12,7 +12,7 @@ import assert from 'node:assert'
 
 // Convert a hexadecimal string to a Uint8Array
 export const fromHexString = (hexString) =>
-    Uint8Array.from(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
+    Uint8Array.from(hexString.match(/.{2}/g).map((byte) => parseInt(byte, 16)));
 
 const files = fs.readdirSync("../json");
 
@@ -23,7 +23,7 @@ for (const file of files) {
         const zkpFuns = new Map([
             ['groth16', wasm.verify_groth16],
             ['plonk', wasm.verify_plonk],
-            ['compressed', null],
+            ['compressed', wasm.verify_compressed],
         ]);
 
         const fileLower = file.toLowerCase();
