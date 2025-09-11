@@ -8,9 +8,7 @@ resolver = "2"
 # sp1-zkvm = { version = "5.2.1" }
 # sp1-build = { version = "5.2.1" }
 
-sp1-verifier = { path = "../sp1/crates/verifier", default-features = false, features = [
-    "compressed",
-] }
+sp1-verifier = { path = "../sp1/crates/verifier", default-features = false }
 sp1-sdk = { path = "../sp1/crates/sdk" }
 sp1-zkvm = { path = "../sp1/crates/zkvm/entrypoint" }
 sp1-build = { path = "../sp1/crates/build" }
