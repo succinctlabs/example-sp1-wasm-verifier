@@ -1,9 +1,9 @@
 //! A simple script to generate proofs for the fibonacci program, and serialize them to JSON.
 
-use std::fs::File;
+use std::{fmt::Display, fs::File};
 
 use anyhow::{Context, Result};
-use clap::Parser;
+use clap::{Parser, ValueEnum};
 use flate2::{write::GzEncoder, Compression};
 use serde::{Deserialize, Serialize};
 use sp1_sdk::{include_elf, utils, HashableKey, ProverClient, SP1ProofWithPublicValues, SP1Stdin};
@@ -33,10 +33,33 @@ struct Cli {
     #[arg(
         long,
         value_name = "mode",
-        default_value = "plonk",
-        help = "Specifies the proof mode to use (e.g., groth16, plonk)"
+        value_enum,
+        help = "Specifies the proof mode to use"
     )]
-    mode: String,
+    mode: Mode,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
+enum Mode {
+    Plonk,
+    Groth16,
+    Compressed,
+}
+
+impl Mode {
+    fn as_str(&self) -> &'static str {
+        match self {
+            Mode::Plonk => "plonk",
+            Mode::Groth16 => "groth16",
+            Mode::Compressed => "compressed",
+        }
+    }
+}
+
+impl Display for Mode {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.as_str())
+    }
 }
 
 fn main() -> Result<()> {
@@ -58,26 +81,26 @@ fn main() -> Result<()> {
 
     if args.prove {
         // Generate a proof for the specified program
-        let proof = match args.mode.as_str() {
-            "groth16" => client
+        let proof = match args.mode {
+            Mode::Groth16 => client
                 .prove(&pk, &stdin)
                 .groth16()
                 .run()
                 .context("Groth16 proof generation failed")?,
-            "plonk" => client
+            Mode::Plonk => client
                 .prove(&pk, &stdin)
                 .plonk()
                 .run()
                 .context("Plonk proof generation failed")?,
-            "compressed" => client
+            Mode::Compressed => client
                 .prove(&pk, &stdin)
                 .compressed()
                 .run()
                 .context("Compressed proof generation failed")?,
-            _ => panic!("Invalid proof mode. Use 'groth16', 'plonk', or 'compressed'."),
         };
-        match args.mode.as_str() {
-            "compressed" => {
+        // Compress the "compressed" proofs.
+        match args.mode {
+            Mode::Compressed => {
                 let file = File::create(&proof_path).with_context(|| {
                     format!("failed to create file for saving proof: {proof_path}")
                 })?;
@@ -98,7 +121,7 @@ fn main() -> Result<()> {
         proof: hex::encode(proof.bytes()),
         public_inputs: hex::encode(proof.public_values),
         vkey_hash: vk.bytes32(),
-        mode: args.mode,
+        mode: args.mode.to_string(),
     };
 
     // Serialize the proof data to a JSON file.
