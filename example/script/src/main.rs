@@ -1,6 +1,10 @@
 //! A simple script to generate proofs for the fibonacci program, and serialize them to JSON.
 
+use std::fs::File;
+
+use anyhow::{Context, Result};
 use clap::Parser;
+use flate2::{write::GzEncoder, Compression};
 use serde::{Deserialize, Serialize};
 use sp1_sdk::{include_elf, utils, HashableKey, ProverClient, SP1ProofWithPublicValues, SP1Stdin};
 
@@ -35,7 +39,7 @@ struct Cli {
     mode: String,
 }
 
-fn main() {
+fn main() -> Result<()> {
     // Setup logging for the application
     utils::setup_logger();
 
@@ -59,20 +63,34 @@ fn main() {
                 .prove(&pk, &stdin)
                 .groth16()
                 .run()
-                .expect("Groth16 proof generation failed"),
+                .context("Groth16 proof generation failed")?,
             "plonk" => client
                 .prove(&pk, &stdin)
                 .plonk()
                 .run()
-                .expect("Plonk proof generation failed"),
+                .context("Plonk proof generation failed")?,
             "compressed" => client
                 .prove(&pk, &stdin)
                 .compressed()
                 .run()
-                .expect("Compressed proof generation failed"),
+                .context("Compressed proof generation failed")?,
             _ => panic!("Invalid proof mode. Use 'groth16', 'plonk', or 'compressed'."),
         };
-        proof.save(&proof_path).expect("Failed to save proof");
+        match args.mode.as_str() {
+            "compressed" => {
+                let file = File::create(&proof_path).with_context(|| {
+                    format!("failed to create file for saving proof: {proof_path}")
+                })?;
+                let mut file = GzEncoder::new(file, Compression::default());
+                bincode::serde::encode_into_std_write(
+                    proof,
+                    &mut file,
+                    bincode::config::standard(),
+                )
+                .context("Failed to save proof")?;
+            }
+            _ => proof.save(&proof_path).expect("Failed to save proof"),
+        }
     }
     // Load the proof, extract the proof and public inputs, and serialize the appropriate fields.
     let proof = SP1ProofWithPublicValues::load(&proof_path).expect("Failed to load proof");
@@ -87,5 +105,7 @@ fn main() {
     let json_proof = serde_json::to_string(&fixture).expect("Failed to serialize proof");
     std::fs::write(json_path, json_proof).expect("Failed to write JSON proof");
 
-    println!("Successfully generated json proof for the program!")
+    println!("Successfully generated json proof for the program!");
+
+    Ok(())
 }
