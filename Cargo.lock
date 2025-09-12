@@ -5737,6 +5737,7 @@ dependencies = [
  "p3-field",
  "p3-symmetric",
  "sha2",
+ "sp1-primitives 5.2.1",
  "sp1-recursion-core",
  "sp1-stark",
  "substrate-bn-succinct",
