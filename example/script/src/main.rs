@@ -140,7 +140,7 @@ fn main() -> Result<()> {
                 proof: hex::encode(bincode::serialize(&reduce_proof)?),
                 // public_inputs: "TODO".to_owned(),
                 public_inputs: hex::encode(bincode::serialize(&proof.public_values)?), // May be unused at the moment.
-                vkey_hash: "TODO".to_owned(),
+                vkey_hash: hex::encode(bincode::serialize(&vk.hash_babybear())?),
                 mode: args.mode.to_string(),
             }
         }

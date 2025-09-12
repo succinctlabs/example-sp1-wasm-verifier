@@ -25,6 +25,6 @@ pub fn verify_plonk(proof: &[u8], public_inputs: &[u8], sp1_vk_hash: &str) -> bo
 ///
 /// We hardcode the Plonk VK bytes to only verify SP1 proofs.
 #[wasm_bindgen]
-pub fn verify_compressed(proof: &[u8], public_inputs: &[u8], sp1_vk_hash: &str) -> bool {
+pub fn verify_compressed(proof: &[u8], public_inputs: &[u8], sp1_vk_hash: &[u8]) -> bool {
     CompressedVerifier::verify(proof, public_inputs, sp1_vk_hash).is_ok()
 }

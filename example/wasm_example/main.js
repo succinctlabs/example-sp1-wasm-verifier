@@ -46,7 +46,10 @@ for (const file of files) {
 
         const proof = fromHexString(proof_json.proof);
         const public_inputs = fromHexString(proof_json.public_inputs);
-        const vkey_hash = proof_json.vkey_hash;
+        let vkey_hash = proof_json.vkey_hash;
+        if (zkpType == 'compressed') {
+            vkey_hash = fromHexString(vkey_hash);
+        }
 
         // Get the values using DataView.
         const view = new DataView(public_inputs.buffer);

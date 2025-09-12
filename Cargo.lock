@@ -5735,6 +5735,7 @@ dependencies = [
  "lazy_static",
  "p3-baby-bear",
  "p3-field",
+ "p3-symmetric",
  "sha2",
  "sp1-recursion-core",
  "sp1-stark",
