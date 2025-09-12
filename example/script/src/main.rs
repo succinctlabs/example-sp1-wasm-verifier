@@ -75,7 +75,7 @@ fn main() -> Result<()> {
     // Parse command line arguments
     let args = Cli::parse();
     let mut stdin = SP1Stdin::new();
-    stdin.write(&1000u32);
+    stdin.write(&1666667u32);
 
     // Initialize the prover client.
     let client = ProverClient::from_env();
