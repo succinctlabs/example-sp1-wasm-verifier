@@ -23,7 +23,7 @@ for (const file of files) {
         const zkpFuns = new Map([
             ['groth16', wasm.verify_groth16],
             ['plonk', wasm.verify_plonk],
-            ['compressed', wasm.verify_compressed],
+            ['compressed', (proof, _, vkey_hash) => wasm.verify_compressed(proof, vkey_hash)],
         ]);
 
         const fileLower = file.toLowerCase();
@@ -45,23 +45,25 @@ for (const file of files) {
         const proof_json = JSON.parse(fileContent);
 
         const proof = fromHexString(proof_json.proof);
-        const public_inputs = fromHexString(proof_json.public_inputs);
+        const public_inputs = proof_json.public_inputs && fromHexString(proof_json.public_inputs);
         let vkey_hash = proof_json.vkey_hash;
         if (zkpType == 'compressed') {
             vkey_hash = fromHexString(vkey_hash);
         }
 
-        // Get the values using DataView.
-        const view = new DataView(public_inputs.buffer);
+        if (public_inputs != null) {
+            // Get the values using DataView.
+            const view = new DataView(public_inputs.buffer);
 
-        // Read each 32-bit (4 byte) integer as little-endian
-        const n = view.getUint32(0, true);
-        const a = view.getUint32(4, true);
-        const b = view.getUint32(8, true);
+            // Read each 32-bit (4 byte) integer as little-endian
+            const n = view.getUint32(0, true);
+            const a = view.getUint32(4, true);
+            const b = view.getUint32(8, true);
 
-        console.log(`n: ${n}`);
-        console.log(`a: ${a}`);
-        console.log(`b: ${b}`);
+            console.log(`n: ${n}`);
+            console.log(`a: ${a}`);
+            console.log(`b: ${b}`);
+        }
 
         const startTime = performance.now();
         const result = verifyFunction(proof, public_inputs, vkey_hash);

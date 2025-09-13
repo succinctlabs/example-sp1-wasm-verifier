@@ -19,9 +19,9 @@ pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
 
 #[derive(Serialize, Deserialize)]
 struct ProofData {
-    proof: String,         // hex string
-    public_inputs: String, // hex string
-    vkey_hash: String,     // vk.bytes32()
+    proof: String,                 // hex string
+    public_inputs: Option<String>, // hex string
+    vkey_hash: String,             // vk.bytes32()
     mode: String,
 }
 
@@ -76,6 +76,7 @@ fn main() -> Result<()> {
     let args = Cli::parse();
     let mut stdin = SP1Stdin::new();
     stdin.write(&1666667u32);
+    // stdin.write(&1000u32); // Use this to obtain a single-shard proof.
 
     // Initialize the prover client.
     let client = ProverClient::from_env();
@@ -138,8 +139,7 @@ fn main() -> Result<()> {
 
             ProofData {
                 proof: hex::encode(bincode::serialize(&reduce_proof)?),
-                // public_inputs: "TODO".to_owned(),
-                public_inputs: hex::encode(bincode::serialize(&proof.public_values)?), // May be unused at the moment.
+                public_inputs: None,
                 vkey_hash: hex::encode(bincode::serialize(&vk.hash_babybear())?),
                 mode: args.mode.to_string(),
             }
@@ -148,7 +148,7 @@ fn main() -> Result<()> {
             let proof = SP1ProofWithPublicValues::load(&proof_path).expect("Failed to load proof");
             ProofData {
                 proof: hex::encode(proof.bytes()),
-                public_inputs: hex::encode(proof.public_values),
+                public_inputs: Some(hex::encode(proof.public_values)),
                 vkey_hash: vk.bytes32(),
                 mode: args.mode.to_string(),
             }
