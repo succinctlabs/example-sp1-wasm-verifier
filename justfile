@@ -1,3 +1,7 @@
+# List the justfile recipes.
+default:
+    @just --list --justfile {{justfile()}}
+
 # Build wasm bindings for the verifier (dev mode)
 build-wasm-dev:
     cd verifier && ${CARGO_HOME:-$HOME/.cargo/}bin/wasm-pack build --target nodejs --dev
@@ -6,19 +10,19 @@ build-wasm-dev:
 build-wasm-release:
     cd verifier && ${CARGO_HOME:-$HOME/.cargo/}bin/wasm-pack build --target nodejs --release
 
-# Generate proof with specified mode (groth16 or plonk)
-gen-proof mode:
-    cd example/script && cargo run --release -- --mode {{mode}}
+# From an existing proof artifact, generate a JSON representation for a given proof mode (compressed/groth16/plonk).
+gen-proof-json mode:
+    cd example/script && RUST_LOG=info cargo run --release -- --mode {{mode}}
 
-# Generate fresh proof with specified mode (groth16 or plonk)
+# Generate a proof artifact and its JSON representation for a given proof mode (compressed/groth16/plonk).
 gen-proof-fresh mode:
-    cd example/script && cargo run --release -- --mode {{mode}} --prove
+    cd example/script && RUST_LOG=info cargo run --release -- --mode {{mode}} --prove
 
-# Generate both proof types (using existing proofs)
-gen-proofs: (gen-proof "groth16") (gen-proof "plonk")
+# From existing proof artifacts, generate JSON representations.
+gen-proofs-json: (gen-proof-json "compressed") (gen-proof-json "groth16") (gen-proof-json "plonk")
 
-# Generate both proof types (fresh proofs)
-gen-proofs-fresh: (gen-proof-fresh "groth16") (gen-proof-fresh "plonk")
+# Generate proof artifacts and their JSON representations.
+gen-proofs-fresh: (gen-proof-fresh "compressed") (gen-proof-fresh "groth16") (gen-proof-fresh "plonk")
 
 # Install dependencies for wasm example
 install-deps:
@@ -28,8 +32,5 @@ install-deps:
 test-wasm:
     cd example/wasm_example && pnpm run test
 
-# Full setup: build wasm, generate proofs, install deps, and test
-setup: build-wasm-dev gen-proofs install-deps test-wasm
-
-# Full setup with release build and fresh proofs
-setup-release: build-wasm-release gen-proofs-fresh install-deps test-wasm
+# Build and test end-to-end. Useful when setting up for the first time.
+init: build-wasm-dev gen-proofs-fresh install-deps test-wasm
