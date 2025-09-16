@@ -12,37 +12,58 @@ import assert from 'node:assert'
 
 // Convert a hexadecimal string to a Uint8Array
 export const fromHexString = (hexString) =>
-    Uint8Array.from(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
+    Uint8Array.from(hexString.match(/.{2}/g).map((byte) => parseInt(byte, 16)));
 
 const files = fs.readdirSync("../json");
 
 // Iterate through each file in the data directory
 for (const file of files) {
     try {
+        // Determine the ZKP type based on the filename
+        const zkpFuns = new Map([
+            ['groth16', wasm.verify_groth16],
+            ['plonk', wasm.verify_plonk],
+            ['compressed', (proof, _, vkey_hash) => wasm.verify_compressed(proof, vkey_hash)],
+        ]);
+
+        const fileLower = file.toLowerCase();
+        const zkpType = zkpFuns.keys().find(ty => fileLower.includes(ty));
+        if (zkpType == null) {
+            console.log(`skipping file ${file}`);
+            continue;
+        }
+        // Select the appropriate verification function and verification key based on ZKP type
+        const verifyFunction = zkpFuns.get(zkpType);
+
+        if (verifyFunction == null) {
+            console.log(`skipping verification: ${zkpType} is unimplemented`);
+            continue;
+        }
+
         // Read and parse the JSON content of the file
         const fileContent = fs.readFileSync(path.join("../json", file), 'utf8');
         const proof_json = JSON.parse(fileContent);
 
-        // Determine the ZKP type (Groth16 or Plonk) based on the filename
-        const zkpType = file.toLowerCase().includes('groth16') ? 'groth16' : 'plonk';
         const proof = fromHexString(proof_json.proof);
-        const public_inputs = fromHexString(proof_json.public_inputs);
-        const vkey_hash = proof_json.vkey_hash;
+        const public_inputs = proof_json.public_inputs && fromHexString(proof_json.public_inputs);
+        let vkey_hash = proof_json.vkey_hash;
+        if (zkpType == 'compressed') {
+            vkey_hash = fromHexString(vkey_hash);
+        }
 
-        // Get the values using DataView.
-        const view = new DataView(public_inputs.buffer);
+        if (public_inputs != null) {
+            // Get the values using DataView.
+            const view = new DataView(public_inputs.buffer);
 
-        // Read each 32-bit (4 byte) integer as little-endian
-        const n = view.getUint32(0, true);
-        const a = view.getUint32(4, true);
-        const b = view.getUint32(8, true);
+            // Read each 32-bit (4 byte) integer as little-endian
+            const n = view.getUint32(0, true);
+            const a = view.getUint32(4, true);
+            const b = view.getUint32(8, true);
 
-        console.log(`n: ${n}`);
-        console.log(`a: ${a}`);
-        console.log(`b: ${b}`);
-
-        // Select the appropriate verification function and verification key based on ZKP type
-        const verifyFunction = zkpType === 'groth16' ? wasm.verify_groth16 : wasm.verify_plonk;
+            console.log(`n: ${n}`);
+            console.log(`a: ${a}`);
+            console.log(`b: ${b}`);
+        }
 
         const startTime = performance.now();
         const result = verifyFunction(proof, public_inputs, vkey_hash);

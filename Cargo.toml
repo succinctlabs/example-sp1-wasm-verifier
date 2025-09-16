@@ -3,7 +3,14 @@ members = ["verifier", "example/fibonacci-program", "example/script"]
 resolver = "2"
 
 [workspace.dependencies]
-sp1-verifier = { version = "5.2.1", default-features = false }
-sp1-sdk = { version = "5.2.1" }
-sp1-zkvm = { version = "5.2.1" }
-sp1-build = { version = "5.2.1" }
+# sp1-verifier = { version = "5.2.1", default-features = false }
+# sp1-sdk = { version = "5.2.1" }
+# sp1-zkvm = { version = "5.2.1" }
+# sp1-build = { version = "5.2.1" }
+
+# Until the relevant feature is published on crates.io:
+
+sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", rev = "5f75ca0a9bf6612f8ee521a5b46dea5c5654175a" }
+sp1-zkvm = { git = "https://github.com/succinctlabs/sp1.git", rev = "5f75ca0a9bf6612f8ee521a5b46dea5c5654175a" }
+sp1-build = { git = "https://github.com/succinctlabs/sp1.git", rev = "5f75ca0a9bf6612f8ee521a5b46dea5c5654175a" }
+sp1-verifier = { git = "https://github.com/succinctlabs/sp1.git", rev = "5f75ca0a9bf6612f8ee521a5b46dea5c5654175a", default-features = false }
