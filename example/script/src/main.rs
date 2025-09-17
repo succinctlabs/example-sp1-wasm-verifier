@@ -19,9 +19,9 @@ pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
 
 #[derive(Serialize, Deserialize)]
 struct ProofData {
-    proof: String,                 // hex string
-    public_inputs: Option<String>, // hex string
-    vkey_hash: String,             // vk.bytes32()
+    proof: String,         // hex string
+    public_inputs: String, // hex string
+    vkey_hash: String,     // vk.bytes32()
     mode: String,
 }
 
@@ -143,7 +143,7 @@ fn main() -> Result<()> {
 
             ProofData {
                 proof: hex::encode(bincode::serialize(&reduce_proof)?),
-                public_inputs: None,
+                public_inputs: hex::encode(proof.public_values),
                 vkey_hash: hex::encode(bincode::serialize(&vk.hash_babybear())?),
                 mode: args.mode.to_string(),
             }
@@ -152,7 +152,7 @@ fn main() -> Result<()> {
             let proof = SP1ProofWithPublicValues::load(&proof_path).expect("Failed to load proof");
             ProofData {
                 proof: hex::encode(proof.bytes()),
-                public_inputs: Some(hex::encode(proof.public_values)),
+                public_inputs: hex::encode(proof.public_values),
                 vkey_hash: vk.bytes32(),
                 mode: args.mode.to_string(),
             }

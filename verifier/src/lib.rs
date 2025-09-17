@@ -37,13 +37,17 @@ pub fn verify_plonk(proof: &[u8], public_inputs: &[u8], sp1_vk_hash: &str) -> bo
 ///
 /// We hardcode the Plonk VK bytes to only verify SP1 proofs.
 #[wasm_bindgen]
-pub fn verify_compressed(proof: &[u8], sp1_vk_hash: &[u8]) -> bool {
-    handle_result(CompressedVerifier::verify(proof, sp1_vk_hash))
+pub fn verify_compressed(proof: &[u8], public_inputs: &[u8], sp1_vk_hash: &[u8]) -> bool {
+    handle_result(CompressedVerifier::verify(
+        proof,
+        public_inputs,
+        sp1_vk_hash,
+    ))
 }
 
-// Prints errors via `console.error`.
-//
-// Returns whether the variant was `Result::Ok`.
+/// Prints errors via `console.error`.
+///
+/// Returns whether the variant was `Result::Ok`.
 fn handle_result<T, E: Error>(res: Result<T, E>) -> bool {
     res.inspect_err(|e| console::error(&format!("{e}"))).is_ok()
 }
