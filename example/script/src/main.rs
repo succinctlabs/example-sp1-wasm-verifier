@@ -75,8 +75,12 @@ fn main() -> Result<()> {
     // Parse command line arguments
     let args = Cli::parse();
     let mut stdin = SP1Stdin::new();
-    stdin.write(&1666667u32);
-    // stdin.write(&1000u32); // Use this to obtain a single-shard proof.
+    stdin.write(&match args.mode {
+        // Multi-shard proof.
+        Mode::Compressed => 1666667u32,
+        // Single-shard proof.
+        _ => 1000u32,
+    });
 
     // Initialize the prover client.
     let client = ProverClient::from_env();
