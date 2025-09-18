@@ -10,7 +10,7 @@ resolver = "2"
 
 # Until the relevant feature is published on crates.io:
 
-sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", rev = "5f75ca0a9bf6612f8ee521a5b46dea5c5654175a" }
-sp1-zkvm = { git = "https://github.com/succinctlabs/sp1.git", rev = "5f75ca0a9bf6612f8ee521a5b46dea5c5654175a" }
-sp1-build = { git = "https://github.com/succinctlabs/sp1.git", rev = "5f75ca0a9bf6612f8ee521a5b46dea5c5654175a" }
-sp1-verifier = { git = "https://github.com/succinctlabs/sp1.git", rev = "5f75ca0a9bf6612f8ee521a5b46dea5c5654175a", default-features = false }
+sp1-sdk = { git = "https://github.com/succinctlabs/sp1.git", rev = "5868f0bf37c216e9906d272d0baba98a94d71b91" }
+sp1-zkvm = { git = "https://github.com/succinctlabs/sp1.git", rev = "5868f0bf37c216e9906d272d0baba98a94d71b91" }
+sp1-build = { git = "https://github.com/succinctlabs/sp1.git", rev = "5868f0bf37c216e9906d272d0baba98a94d71b91" }
+sp1-verifier = { git = "https://github.com/succinctlabs/sp1.git", rev = "5868f0bf37c216e9906d272d0baba98a94d71b91", default-features = false }

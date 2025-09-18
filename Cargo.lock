@@ -5273,7 +5273,7 @@ dependencies = [
 [[package]]
 name = "sp1-build"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "anyhow",
  "cargo_metadata",
@@ -5286,7 +5286,7 @@ dependencies = [
 [[package]]
 name = "sp1-core-executor"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "bincode",
  "bytemuck",
@@ -5309,7 +5309,7 @@ dependencies = [
  "serde",
  "serde_json",
  "sp1-curves",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
  "sp1-stark",
  "strum",
  "strum_macros",
@@ -5324,7 +5324,7 @@ dependencies = [
 [[package]]
 name = "sp1-core-machine"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "bincode",
  "cbindgen",
@@ -5362,7 +5362,7 @@ dependencies = [
  "sp1-core-executor",
  "sp1-curves",
  "sp1-derive",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
  "sp1-stark",
  "static_assertions",
  "strum",
@@ -5379,7 +5379,7 @@ dependencies = [
 [[package]]
 name = "sp1-cuda"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "bincode",
  "ctrlc",
@@ -5395,7 +5395,7 @@ dependencies = [
 [[package]]
 name = "sp1-curves"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "cfg-if",
  "dashu",
@@ -5408,7 +5408,7 @@ dependencies = [
  "p3-field",
  "serde",
  "snowbridge-amcl",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
  "sp1-stark",
  "typenum",
 ]
@@ -5416,7 +5416,7 @@ dependencies = [
 [[package]]
 name = "sp1-derive"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "quote",
  "syn 1.0.109",
@@ -5437,11 +5437,11 @@ dependencies = [
 [[package]]
 name = "sp1-lib"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "bincode",
  "serde",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
 ]
 
 [[package]]
@@ -5467,7 +5467,7 @@ dependencies = [
 [[package]]
 name = "sp1-primitives"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "bincode",
  "blake3",
@@ -5486,7 +5486,7 @@ dependencies = [
 [[package]]
 name = "sp1-prover"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "anyhow",
  "bincode",
@@ -5515,7 +5515,7 @@ dependencies = [
  "sha2",
  "sp1-core-executor",
  "sp1-core-machine",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
  "sp1-recursion-circuit",
  "sp1-recursion-compiler",
  "sp1-recursion-core",
@@ -5530,7 +5530,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-circuit"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "hashbrown 0.14.5",
  "itertools 0.13.0",
@@ -5553,7 +5553,7 @@ dependencies = [
  "sp1-core-executor",
  "sp1-core-machine",
  "sp1-derive",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
  "sp1-recursion-compiler",
  "sp1-recursion-core",
  "sp1-recursion-gnark-ffi",
@@ -5564,7 +5564,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-compiler"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "backtrace",
  "itertools 0.13.0",
@@ -5574,7 +5574,7 @@ dependencies = [
  "p3-symmetric",
  "serde",
  "sp1-core-machine",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
  "sp1-recursion-core",
  "sp1-recursion-derive",
  "sp1-stark",
@@ -5585,7 +5585,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-core"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "backtrace",
  "cbindgen",
@@ -5615,7 +5615,7 @@ dependencies = [
  "serde",
  "sp1-core-machine",
  "sp1-derive",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
  "sp1-stark",
  "static_assertions",
  "thiserror 1.0.69",
@@ -5627,7 +5627,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-derive"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "quote",
  "syn 1.0.109",
@@ -5636,7 +5636,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-gnark-ffi"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "anyhow",
  "bincode",
@@ -5661,7 +5661,7 @@ dependencies = [
 [[package]]
 name = "sp1-sdk"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "alloy-primitives",
  "alloy-signer",
@@ -5696,7 +5696,7 @@ dependencies = [
  "sp1-core-executor",
  "sp1-core-machine",
  "sp1-cuda",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
  "sp1-prover",
  "sp1-stark",
  "strum",
@@ -5713,7 +5713,7 @@ dependencies = [
 [[package]]
 name = "sp1-stark"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "arrayref",
  "hashbrown 0.14.5",
@@ -5737,7 +5737,7 @@ dependencies = [
  "rayon-scan",
  "serde",
  "sp1-derive",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
  "strum",
  "strum_macros",
  "sysinfo",
@@ -5747,7 +5747,7 @@ dependencies = [
 [[package]]
 name = "sp1-verifier"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "bincode",
  "blake3",
@@ -5758,7 +5758,7 @@ dependencies = [
  "p3-field",
  "p3-symmetric",
  "sha2",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
  "sp1-recursion-core",
  "sp1-stark",
  "substrate-bn-succinct",
@@ -5777,7 +5777,7 @@ dependencies = [
 [[package]]
 name = "sp1-zkvm"
 version = "5.2.1"
-source = "git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a#5f75ca0a9bf6612f8ee521a5b46dea5c5654175a"
+source = "git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91#5868f0bf37c216e9906d272d0baba98a94d71b91"
 dependencies = [
  "cfg-if",
  "getrandom 0.2.16",
@@ -5786,8 +5786,8 @@ dependencies = [
  "libm",
  "rand 0.8.5",
  "sha2",
- "sp1-lib 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
- "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5f75ca0a9bf6612f8ee521a5b46dea5c5654175a)",
+ "sp1-lib 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
+ "sp1-primitives 5.2.1 (git+https://github.com/succinctlabs/sp1.git?rev=5868f0bf37c216e9906d272d0baba98a94d71b91)",
 ]
 
 [[package]]
