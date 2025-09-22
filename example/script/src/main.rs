@@ -11,11 +11,11 @@ use clap::{Parser, ValueEnum};
 use flate2::{bufread::GzDecoder, write::GzEncoder, Compression};
 use serde::{Deserialize, Serialize};
 use sp1_sdk::{
-    include_elf, utils, HashableKey, ProverClient, SP1Proof, SP1ProofWithPublicValues, SP1Stdin,
+    include_elf, prelude::*, utils, ProverClient, SP1Proof, SP1ProofWithPublicValues, SP1Stdin,
 };
 
 /// The ELF (executable and linkable format) file for the fibonacci program.
-pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
+pub const FIBONACCI_ELF: Elf = include_elf!("fibonacci-program");
 
 #[derive(Serialize, Deserialize)]
 struct ProofData {
@@ -68,7 +68,8 @@ impl Display for Mode {
     }
 }
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
     // Setup logging for the application
     utils::setup_logger();
 
@@ -83,8 +84,8 @@ fn main() -> Result<()> {
     });
 
     // Initialize the prover client.
-    let client = ProverClient::from_env();
-    let (pk, vk) = client.setup(FIBONACCI_ELF);
+    let client = ProverClient::from_env().await;
+    let pk = client.setup(FIBONACCI_ELF).await?;
 
     // These are the output paths.
     let proof_path = format!("../binaries/fibonacci_{}_proof.bin", args.mode);
@@ -94,19 +95,19 @@ fn main() -> Result<()> {
         // Generate a proof for the specified program
         let proof = match args.mode {
             Mode::Groth16 => client
-                .prove(&pk, &stdin)
+                .prove(&pk, stdin)
                 .groth16()
-                .run()
+                .await
                 .context("Groth16 proof generation failed")?,
             Mode::Plonk => client
-                .prove(&pk, &stdin)
+                .prove(&pk, stdin)
                 .plonk()
-                .run()
+                .await
                 .context("Plonk proof generation failed")?,
             Mode::Compressed => client
-                .prove(&pk, &stdin)
+                .prove(&pk, stdin)
                 .compressed()
-                .run()
+                .await
                 .context("Compressed proof generation failed")?,
         };
 
@@ -144,7 +145,7 @@ fn main() -> Result<()> {
             ProofData {
                 proof: hex::encode(bincode::serialize(&reduce_proof)?),
                 public_inputs: hex::encode(proof.public_values),
-                vkey_hash: hex::encode(bincode::serialize(&vk.hash_babybear())?),
+                vkey_hash: hex::encode(bincode::serialize(&pk.verifying_key().hash_koalabear())?),
                 mode: args.mode.to_string(),
             }
         }
@@ -153,7 +154,7 @@ fn main() -> Result<()> {
             ProofData {
                 proof: hex::encode(proof.bytes()),
                 public_inputs: hex::encode(proof.public_values),
-                vkey_hash: vk.bytes32(),
+                vkey_hash: pk.verifying_key().bytes32(),
                 mode: args.mode.to_string(),
             }
         }
