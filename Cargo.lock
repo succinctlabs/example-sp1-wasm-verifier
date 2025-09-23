@@ -3925,6 +3925,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
 
 [[package]]
+name = "signal-hook-registry"
+version = "1.4.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b2a4719bff48cee6b39d12c020eeb490953ad2443b7055bd0b21fca26bd8c28b"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "signature"
 version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4311,7 +4320,6 @@ dependencies = [
  "slop-tensor",
  "slop-utils",
  "thiserror 1.0.69",
- "tokio",
 ]
 
 [[package]]
@@ -4534,6 +4542,7 @@ dependencies = [
  "slop-matrix",
  "slop-merkle-tree",
  "slop-multilinear",
+ "slop-poseidon2",
  "slop-sumcheck",
  "slop-symmetric",
  "slop-tensor",
@@ -4709,7 +4718,6 @@ dependencies = [
  "sp1-recursion-compiler",
  "sp1-recursion-executor",
  "sp1-recursion-machine",
- "tokio",
  "tracing",
 ]
 
@@ -4751,7 +4759,6 @@ dependencies = [
  "slop-poseidon2",
  "slop-symmetric",
  "smallvec",
- "sp1-core-machine",
  "sp1-derive",
  "sp1-hypercube",
  "static_assertions",
@@ -4798,14 +4805,11 @@ dependencies = [
  "slop-poseidon2",
  "slop-symmetric",
  "slop-whir",
- "sp1-core-machine",
  "sp1-derive",
  "sp1-hypercube",
  "sp1-primitives 6.0.0",
  "sp1-recursion-executor",
  "strum",
- "strum_macros",
- "tokio",
  "tracing",
  "zkhash",
 ]
@@ -4860,8 +4864,11 @@ dependencies = [
  "hex",
  "lazy_static",
  "sha2",
+ "slop-algebra",
+ "slop-symmetric",
  "sp1-hypercube",
  "sp1-primitives 6.0.0",
+ "sp1-recursion-executor",
  "sp1-recursion-machine",
  "substrate-bn-succinct",
  "thiserror 2.0.16",
@@ -5216,6 +5223,7 @@ dependencies = [
  "libc",
  "mio",
  "pin-project-lite",
+ "signal-hook-registry",
  "slab",
  "socket2 0.6.0",
  "tokio-macros",

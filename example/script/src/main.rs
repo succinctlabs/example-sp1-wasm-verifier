@@ -138,13 +138,13 @@ async fn main() -> Result<()> {
             let proof: SP1ProofWithPublicValues =
                 bincode::deserialize_from(file).context("Failed to load proof")?;
 
-            let reduce_proof = match proof.proof {
+            let recursion_proof = match proof.proof {
                 SP1Proof::Compressed(p) => p,
                 other => bail!("unexpected proof: {other:?}"),
             };
 
             ProofData {
-                proof: hex::encode(bincode::serialize(&reduce_proof)?),
+                proof: hex::encode(bincode::serialize(&recursion_proof)?),
                 public_inputs: hex::encode(proof.public_values),
                 vkey_hash: hex::encode(bincode::serialize(&pk.verifying_key().hash_koalabear())?),
                 mode: args.mode.to_string(),
