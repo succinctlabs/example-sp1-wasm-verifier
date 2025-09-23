@@ -4,7 +4,7 @@ name = "example-script"
 edition = "2021"
 
 [dependencies]
-sp1-sdk.workspace = true
+sp1-sdk = { workspace = true, features = ["unsound"] }
 clap = { version = "4.0", features = ["derive"] }
 hex = "0.4.3"
 serde = "1.0"

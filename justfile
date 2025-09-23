@@ -19,10 +19,10 @@ gen-proof-fresh mode:
     cd example/script && RUST_LOG=info cargo run --release -- --mode {{mode}} --prove
 
 # From existing proof artifacts, generate JSON representations.
-gen-proofs-json: (gen-proof-json "compressed") (gen-proof-json "groth16") (gen-proof-json "plonk")
+gen-proofs-json: (gen-proof-json "compressed") # (gen-proof-json "groth16") (gen-proof-json "plonk")
 
 # Generate proof artifacts and their JSON representations.
-gen-proofs-fresh: (gen-proof-fresh "compressed") (gen-proof-fresh "groth16") (gen-proof-fresh "plonk")
+gen-proofs-fresh: (gen-proof-fresh "compressed") # (gen-proof-fresh "groth16") (gen-proof-fresh "plonk")
 
 # Install dependencies for wasm example
 install-deps:

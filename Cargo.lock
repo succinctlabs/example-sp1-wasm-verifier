@@ -4863,11 +4863,19 @@ dependencies = [
 name = "sp1-verifier"
 version = "6.0.0"
 dependencies = [
+ "bincode",
  "blake3",
  "cfg-if",
  "hex",
  "lazy_static",
  "sha2",
+ "slop-algebra",
+ "slop-baby-bear",
+ "slop-symmetric",
+ "sp1-core-executor",
+ "sp1-hypercube",
+ "sp1-primitives 6.0.0",
+ "sp1-recursion-machine",
  "substrate-bn-succinct",
  "thiserror 2.0.16",
 ]

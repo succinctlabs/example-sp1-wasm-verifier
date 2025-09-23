@@ -11,7 +11,7 @@ use clap::{Parser, ValueEnum};
 use flate2::{bufread::GzDecoder, write::GzEncoder, Compression};
 use serde::{Deserialize, Serialize};
 use sp1_sdk::{
-    include_elf, prelude::*, utils, ProverClient, SP1Proof, SP1ProofWithPublicValues, SP1Stdin,
+    include_elf, prelude::*, utils, CpuProver, SP1Proof, SP1ProofWithPublicValues, SP1Stdin,
 };
 
 /// The ELF (executable and linkable format) file for the fibonacci program.
@@ -84,7 +84,8 @@ async fn main() -> Result<()> {
     });
 
     // Initialize the prover client.
-    let client = ProverClient::from_env().await;
+    // TODO: replace this method call vk verification is available.
+    let client = CpuProver::new_unsound().await;
     let pk = client.setup(FIBONACCI_ELF).await?;
 
     // These are the output paths.
