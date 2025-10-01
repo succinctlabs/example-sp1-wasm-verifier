@@ -6,13 +6,11 @@ use std::{
     io::{BufReader, BufWriter},
 };
 
-use anyhow::{bail, Context, Result};
+use anyhow::{Context, Result};
 use clap::{Parser, ValueEnum};
 use flate2::{bufread::GzDecoder, write::GzEncoder, Compression};
 use serde::{Deserialize, Serialize};
-use sp1_sdk::{
-    include_elf, utils, HashableKey, ProverClient, SP1Proof, SP1ProofWithPublicValues, SP1Stdin,
-};
+use sp1_sdk::{include_elf, utils, HashableKey, ProverClient, SP1ProofWithPublicValues, SP1Stdin};
 
 /// The ELF (executable and linkable format) file for the fibonacci program.
 pub const FIBONACCI_ELF: &[u8] = include_elf!("fibonacci-program");
@@ -136,13 +134,8 @@ fn main() -> Result<()> {
             let proof: SP1ProofWithPublicValues =
                 bincode::deserialize_from(file).context("Failed to load proof")?;
 
-            let reduce_proof = match proof.proof {
-                SP1Proof::Compressed(p) => p,
-                other => bail!("unexpected proof: {other:?}"),
-            };
-
             ProofData {
-                proof: hex::encode(bincode::serialize(&reduce_proof)?),
+                proof: hex::encode(bincode::serialize(&proof.proof)?),
                 public_inputs: hex::encode(proof.public_values),
                 vkey_hash: hex::encode(bincode::serialize(&vk.hash_babybear())?),
                 mode: args.mode.to_string(),
