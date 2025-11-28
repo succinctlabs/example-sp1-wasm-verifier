@@ -16,7 +16,7 @@ getrandom = { version = "0.2", features = ["js"] }
 sp1-verifier = { workspace = true, default-features = false, features = [
     "compressed",
 ] }
-uniffi = { version = "0.30.0", features = [ "cli", "wasm-unstable-single-threaded" ] }
+uniffi = { version = "0.30.0", features = [ "cli" ] }
 
 [build-dependencies]
 uniffi = { version = "0.30.0", features = [ "build" ] }
@@ -24,4 +24,4 @@ uniffi = { version = "0.30.0", features = [ "build" ] }
 # This is necessary for the wasm-bindgen.
 [lib]
 crate-type = ["cdylib", "staticlib"]
-name = "verifier"
+name = "sp1_uniffi_verifier"
