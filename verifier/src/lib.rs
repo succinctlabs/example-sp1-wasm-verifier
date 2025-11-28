@@ -33,7 +33,7 @@ pub fn verify_plonk(proof: &[u8], public_inputs: &[u8], sp1_vk_hash: &str) -> bo
     ))
 }
 
-/// Wrapper around [`sp1_verifier::PlonkVerifier::verify`].
+/// Wrapper around [`sp1_verifier::CompressedVerifier::verify_sp1_proof`].
 ///
 /// We hardcode the Plonk VK bytes to only verify SP1 proofs.
 #[wasm_bindgen]
