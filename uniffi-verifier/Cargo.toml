@@ -16,6 +16,7 @@ getrandom = { version = "0.2", features = ["js"] }
 sp1-verifier = { workspace = true, default-features = false, features = [
     "compressed",
 ] }
+thiserror = "2.0.17"
 uniffi = { version = "0.30.0", features = [ "cli" ] }
 
 [build-dependencies]
