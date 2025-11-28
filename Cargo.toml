@@ -1,5 +1,5 @@
 [workspace]
-members = ["verifier", "example/fibonacci-program", "example/script"]
+members = ["verifier", "uniffi-verifier", "example/fibonacci-program", "example/script"]
 resolver = "2"
 
 [workspace.dependencies]
