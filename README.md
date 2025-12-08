@@ -71,3 +71,7 @@ pnpm run test
 ```
 
 This runs [`main.js`](example/wasm_example/main.js), which first reads the proof data from the artifacts in `example/json` into a Wasm-friendly format. Then, for each proof, it calls the appropriate verification function via the generated Wasm bindings. Finally, it prints verification durations and (if they are easily available) the public values.
+
+### UniFFI bindings
+
+The `uniffi-verifier` crate provides an alternative way to generate bindings for `sp1-verifier` using [UniFFI](https://mozilla.github.io/uniffi-rs/). Unlike the Wasm bindings which target JavaScript/Node.js, UniFFI can generate bindings for [multiple languages](https://github.com/mozilla/uniffi-rs?tab=readme-ov-file#third-party-foreign-language-bindings) including Kotlin, Swift, Python, and Ruby. This makes it possible to integrate SP1 proof verification into mobile applications, backend services, and other non-web environments.
