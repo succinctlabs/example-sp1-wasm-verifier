@@ -1,0 +1,25 @@
+[package]
+name = "sp1-uniffi-verifier"
+authors = ["Bhargav Annem, Yuwen Zhang"]
+description = "A rust verifier for BN254 curve"
+repository = "https://github.com/succinctlabs/example-sp1-wasm-verifier"
+keywords = ["zero-knowledge", "cryptography", "zkSNARK", "SNARK", "gnark"]
+categories = ["cryptography"]
+readme = "README.md"
+include = ["Cargo.toml", "src", "README.md", "LICENSE-APACHE", "LICENSE-MIT"]
+license = "MIT/Apache-2.0"
+edition = "2021"
+version = "5.0.1"
+
+[dependencies]
+getrandom = { version = "0.2", features = ["js"] }
+sp1-verifier = { workspace = true, default-features = false, features = [
+    "compressed",
+] }
+thiserror = "2.0.17"
+uniffi = { version = "=0.29.3", features = [ "cli" ] }
+
+# This is necessary for the wasm-bindgen.
+[lib]
+crate-type = ["cdylib", "staticlib"]
+name = "sp1_uniffi_verifier"
