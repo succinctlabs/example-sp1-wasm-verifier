@@ -9,13 +9,11 @@ readme = "README.md"
 include = ["Cargo.toml", "src", "README.md", "LICENSE-APACHE", "LICENSE-MIT"]
 license = "MIT/Apache-2.0"
 edition = "2021"
-version = "5.0.1"
+version = "6.0.0"
 
 [dependencies]
 getrandom = { version = "0.2", features = ["js"] }
-sp1-verifier = { workspace = true, default-features = false, features = [
-    "compressed",
-] }
+sp1-verifier = { workspace = true, default-features = false }
 thiserror = "2.0.17"
 uniffi = { version = "=0.29.3", features = [ "cli" ] }
 
