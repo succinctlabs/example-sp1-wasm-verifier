@@ -19,5 +19,5 @@ uniffi = { version = "=0.29.3", features = [ "cli" ] }
 
 # This is necessary for the wasm-bindgen.
 [lib]
-crate-type = ["cdylib", "staticlib"]
+crate-type = ["lib", "cdylib", "staticlib"]
 name = "sp1_uniffi_verifier"
