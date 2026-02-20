@@ -1,7 +1,8 @@
 //! A simple wrapper around the `sp1_verifier` crate.
 
 use sp1_verifier::{
-    CompressedVerifier, Groth16Verifier, PlonkVerifier, GROTH16_VK_BYTES, PLONK_VK_BYTES,
+    compressed::SP1CompressedVerifierRaw, Groth16Verifier, PlonkVerifier, GROTH16_VK_BYTES,
+    PLONK_VK_BYTES,
 };
 
 use crate::error::Error;
@@ -43,7 +44,7 @@ pub fn verify_compressed(
     public_inputs: &[u8],
     sp1_vk_hash: &[u8],
 ) -> Result<bool, Error> {
-    CompressedVerifier::verify_sp1_proof(proof, public_inputs, sp1_vk_hash)?;
+    SP1CompressedVerifierRaw::verify_with_public_values(proof, public_inputs, sp1_vk_hash)?;
 
     Ok(true)
 }

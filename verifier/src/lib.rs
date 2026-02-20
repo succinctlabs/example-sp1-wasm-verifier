@@ -3,7 +3,8 @@
 use core::error::Error;
 
 use sp1_verifier::{
-    CompressedVerifier, Groth16Verifier, PlonkVerifier, GROTH16_VK_BYTES, PLONK_VK_BYTES,
+    compressed::SP1CompressedVerifierRaw, Groth16Verifier, PlonkVerifier, GROTH16_VK_BYTES,
+    PLONK_VK_BYTES,
 };
 use wasm_bindgen::prelude::wasm_bindgen;
 
@@ -38,7 +39,7 @@ pub fn verify_plonk(proof: &[u8], public_inputs: &[u8], sp1_vk_hash: &str) -> bo
 /// We hardcode the Plonk VK bytes to only verify SP1 proofs.
 #[wasm_bindgen]
 pub fn verify_compressed(proof: &[u8], public_inputs: &[u8], sp1_vk_hash: &[u8]) -> bool {
-    handle_result(CompressedVerifier::verify_sp1_proof(
+    handle_result(SP1CompressedVerifierRaw::verify_with_public_values(
         proof,
         public_inputs,
         sp1_vk_hash,

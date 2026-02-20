@@ -1,4 +1,4 @@
-use sp1_verifier::{CompressedError, Groth16Error, PlonkError};
+use sp1_verifier::{compressed::CompressedError, Groth16Error, PlonkError};
 use thiserror::Error;
 
 #[derive(Debug, Error, uniffi::Error)]
